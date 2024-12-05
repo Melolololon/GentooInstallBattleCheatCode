@@ -1,1 +1,1 @@
-Gentoo Install Battle Cheat Code!
+Gentoo Install Battle Cheat Code!　For Japanese.
