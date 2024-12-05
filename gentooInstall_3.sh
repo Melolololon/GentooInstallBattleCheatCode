@@ -110,7 +110,7 @@ echo $hostName > /etc/hostname
 		echo "End  Host Setting--------------------------------------------"
 
 	echo "Start Network Setting--------------------------------------------"
-echo "yes" | emerge --ask net-misc/dhcpcd
+emerge --ask net-misc/dhcpcd
 systemctl enable dhcpcd
 
 ifconfig
