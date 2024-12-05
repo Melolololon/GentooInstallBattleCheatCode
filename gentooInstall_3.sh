@@ -10,7 +10,7 @@ echo "Thank You!"
 eselect profile set $profileNum
 
 #@world update
-echo "yes" | emerge --ask --verbose --update --deep --newuse @world
+emerge --ask --verbose --update --deep --newuse @world
 
 		echo "End PortageSetting----------------------------------------------------------"
 		
@@ -36,7 +36,7 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 
 	echo "Start Install FormWare--------------------------------------------"
-echo "yes" | emerge --ask sys-kernel/linux-firmware
+emerge --ask sys-kernel/linux-firmware
 		echo "End Install FormWare--------------------------------------------"
 
 
@@ -46,20 +46,20 @@ echo "yes" | emerge --ask sys-kernel/linux-firmware
 echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
 	
 #compile kernel
-echo "yes" | emerge --ask sys-kernel/gentoo-kernel-bin
+emerge --ask sys-kernel/gentoo-kernel-bin
 
 #delete
-echo "yes" | emerge --depclean
+emerge --depclean
 
 #rebuild
 emerge --ask @module-rebuild
-echo "yes" | emerge --config sys-kernel/gentoo-kernel-bin
+emerge --config sys-kernel/gentoo-kernel-bin
 
 		echo "End Kernel Compile--------------------------------------------"
 
 
 	echo "Start Kernel Source Install--------------------------------------------"
-echo "yes" | emerge --ask sys-kernel/installkernel
+emerge --ask sys-kernel/installkernel
 
 eselect kernel list
 echo "Input Kernel Number"
