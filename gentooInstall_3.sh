@@ -88,7 +88,7 @@ cd /usr/src/
 ls
 cd
 echo "Input Kernel Varsion"
-read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (example 6.6.62))
+read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (Example 6.6.62))
 echo "Thank You!"
 dracut --kver=${kernelVarsion}-gentoo
 		echo "End Initramfs Build--------------------------------------------"
