@@ -36,7 +36,7 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 
 	echo "Start Install FormWare--------------------------------------------"
-emerge --ask sys-kernel/linux-firmware
+echo "yes" | emerge --ask sys-kernel/linux-firmware
 		echo "End Install FormWare--------------------------------------------"
 
 
@@ -46,20 +46,20 @@ emerge --ask sys-kernel/linux-firmware
 echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
 	
 #compile kernel
-echo "y" | emerge --ask sys-kernel/gentoo-kernel-bin
+echo "yes" | emerge --ask sys-kernel/gentoo-kernel-bin
 
 #delete
-echo "y" | emerge --depclean
+echo "yes" | emerge --depclean
 
 #rebuild
 emerge --ask @module-rebuild
-echo "y" | emerge --config sys-kernel/gentoo-kernel-bin
+echo "yes" | emerge --config sys-kernel/gentoo-kernel-bin
 
 		echo "End Kernel Compile--------------------------------------------"
 
 
 	echo "Start Kernel Source Install--------------------------------------------"
-emerge --ask sys-kernel/installkernel
+echo "yes" | emerge --ask sys-kernel/installkernel
 
 eselect kernel list
 echo "Input Kernel Number"
@@ -68,10 +68,10 @@ echo "Thank You!"
 eselect kernel set $kernelNum
 		echo "End Kernel Source Compile--------------------------------------------"
 
-	echo "Start Kernel Install--------------------------------------------"
-emerge --ask sys-kernel/installkernel
+	#echo "Start Kernel Install--------------------------------------------"
+#emerge --ask sys-kernel/installkernel
 
-		echo "End Kernel Install--------------------------------------------"
+		#echo "End Kernel Install--------------------------------------------"
 
 
 	echo "Start Initramfs Build--------------------------------------------"
