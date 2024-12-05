@@ -26,7 +26,7 @@ locale-gen
 
 eselect locale list
 echo "Input Locale Number"
-read locareNum
+read localeNum
 echo "Thank You!"
 eselect locale set $localeNum
 
@@ -35,10 +35,14 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 		echo "End SetLocale--------------------------------------------"
 
 
-	echo "Start Install FormWare--------------------------------------------"
+	echo "Start Install Farmware--------------------------------------------"
 emerge --ask sys-kernel/linux-firmware
-		echo "End Install FormWare--------------------------------------------"
+		echo "End Install FarmWare--------------------------------------------"
 
+
+	echo "Start Intel Microcode--------------------------------------------"
+emerge --ask sys-firmware/intel-microcode
+		echo "End Intel Microcode--------------------------------------------"
 
 
 	echo "Start Kernel Compile--------------------------------------------"
@@ -69,6 +73,7 @@ eselect kernel set $kernelNum
 		echo "End Kernel Source Compile--------------------------------------------"
 
 	#echo "Start Kernel Install--------------------------------------------"
+echo "sys-kernel/installkernel grub" > /etc/portage/package.use/installkernel
 #emerge --ask sys-kernel/installkernel
 
 		#echo "End Kernel Install--------------------------------------------"
@@ -105,8 +110,8 @@ echo "/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0" > /etc/fstab
 echo "Input Host Name"
 read hostName
 echo "Thank You!"
-echo $hostName > /etc/hostname
-
+#echo $hostName > /etc/hostname
+hostnamectl hostname ${hostName}
 		echo "End  Host Setting--------------------------------------------"
 
 	echo "Start Network Setting--------------------------------------------"
@@ -118,7 +123,7 @@ ifconfig
 echo "Input IP Address"
 read ipAddress
 echo "Thank You!"
-echo "${ipAddress}     tux.homenetwork ${hostName} localhost" > /etc/hosts
+echo "${ipAddress}     ${hostname}.homenetwork ${hostName} localhost" > /etc/hosts
 		echo "End  IP Setting--------------------------------------------"
 
 
@@ -129,6 +134,15 @@ passwd
 
 
 
+
+	echo "Start Systemd Option--------------------------------------------"
+systemd-machine-id-setup
+systemd-firstboot --prompt
+systemctl preset-all --preset-mode=enable-only
+		echo "End Systemd Option--------------------------------------------"
+
+
+
 	echo "Start Chrony--------------------------------------------"
 emerge --ask net-misc/chrony
 		echo "End Chrony--------------------------------------------"
@@ -136,7 +150,7 @@ emerge --ask net-misc/chrony
 
 	echo "Start Install GRUB--------------------------------------------"
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
-merge --ask sys-boot/grub
+emerge --ask sys-boot/grub
 grub-install --efi-directory=/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 		echo "End Install GRUB--------------------------------------------"
