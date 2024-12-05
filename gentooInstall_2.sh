@@ -16,7 +16,7 @@ mount /dev/sda1 /efi
 emerge-webrsync
 
 #mirror select
-echo "yes" | emerge --ask --verbose --oneshot app-portage/mirrorselect
+emerge --ask --verbose --oneshot app-portage/mirrorselect
 mirrorselect -i -o >> /etc/portage/make.conf
 
 

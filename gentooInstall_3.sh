@@ -130,13 +130,13 @@ passwd
 
 
 	echo "Start Chrony--------------------------------------------"
-echo "yes" | emerge --ask net-misc/chrony
+emerge --ask net-misc/chrony
 		echo "End Chrony--------------------------------------------"
 
 
 	echo "Start Install GRUB--------------------------------------------"
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
-echo "yes" | emerge --ask sys-boot/grub
+merge --ask sys-boot/grub
 grub-install --efi-directory=/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 		echo "End Install GRUB--------------------------------------------"
