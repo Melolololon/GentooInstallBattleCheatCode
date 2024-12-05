@@ -32,7 +32,11 @@ eselect locale set $localeNum
 
 #locale reload
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+localectl set-keymap jp106
 		echo "End SetLocale--------------------------------------------"
+
+
 
 
 	echo "Start Install Farmware--------------------------------------------"
@@ -154,6 +158,14 @@ emerge --ask sys-boot/grub
 grub-install --efi-directory=/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 		echo "End Install GRUB--------------------------------------------"
+
+
+
+
+	echo "Start Install Japanese Fonts--------------------------------------------"
+emerge source-han-sans
+		echo "End Install Japanese Fonts--------------------------------------------"
+
 
 
 	echo "Start Reboot--------------------------------------------"
