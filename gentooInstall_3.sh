@@ -40,6 +40,7 @@ localectl set-keymap jp106
 
 
 	echo "Start Install Farmware--------------------------------------------"
+echo "ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE"" > /etc/portage/make.conf
 emerge --ask sys-kernel/linux-firmware
 		echo "End Install FarmWare--------------------------------------------"
 
@@ -165,6 +166,26 @@ grub-mkconfig -o /boot/grub/grub.cfg
 	echo "Start Install Japanese Fonts--------------------------------------------"
 emerge source-han-sans
 		echo "End Install Japanese Fonts--------------------------------------------"
+
+
+
+	echo "Start Setup Sudo--------------------------------------------"
+emerge --ask app-admin/sudo
+#add groop
+usermod -aG wheel
+
+		echo "End Setup Sudo--------------------------------------------"
+
+
+
+
+	echo "Start Setup Wifi--------------------------------------------"
+emerge --ask net-wireless/wpa_supplicant
+emerge --ask networkmanager
+systemctl enable NetworkManager
+echo "modules="wpa_supplicant"" > /etc/conf.d/net
+		echo "End Setup Wifi--------------------------------------------"
+
 
 
 
