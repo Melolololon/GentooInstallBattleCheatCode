@@ -29,7 +29,6 @@ echo "Input Locale Number"
 read localeNum
 echo "Thank You!"
 eselect locale set $localeNum
-localectl set-keymap jp106
 
 
 #locale reload
@@ -176,6 +175,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 	echo "Start Install Japanese Fonts--------------------------------------------"
 emerge source-han-sans
+localectl set-keymap jp106
 		echo "End Install Japanese Fonts--------------------------------------------"
 
 
