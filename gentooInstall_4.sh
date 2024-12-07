@@ -1,10 +1,4 @@
 
-
-#test
-localectl set-keymap jp106
-#
-
-
 cd
 umount -l /mnt/gentoo/dev{/shm,/pts,}
 umount -R /mnt/gentoo

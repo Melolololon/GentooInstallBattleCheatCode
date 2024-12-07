@@ -33,13 +33,13 @@ eselect locale set $localeNum
 #locale reload
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
+localectl set-keymap jp106
 		echo "End SetLocale--------------------------------------------"
 
 
 
 
 	echo "Start Install Farmware--------------------------------------------"
-echo 'ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE"' > /etc/portage/make.conf
 emerge --ask sys-kernel/linux-firmware
 		echo "End Install FarmWare--------------------------------------------"
 
@@ -57,11 +57,11 @@ echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
 emerge --ask sys-kernel/gentoo-kernel-bin
 
 #delete
-#emerge --depclean
+emerge --depclean
 
 #rebuild
-#emerge --ask @module-rebuild
-#emerge --config sys-kernel/gentoo-kernel-bin
+emerge --ask @module-rebuild
+emerge --config sys-kernel/gentoo-kernel-bin
 
 		echo "End Kernel Compile--------------------------------------------"
 
@@ -84,7 +84,7 @@ echo "sys-kernel/installkernel grub" > /etc/portage/package.use/installkernel
 
 
 	echo "Start Initramfs Build--------------------------------------------"
-#echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
+echo "sys-kernel/installkernel dracut" >  /etc/portage/package.use/installkernel
 emerge --ask sys-kernel/dracut
 
 #draw kernel Var
@@ -95,9 +95,6 @@ echo "Input Kernel Varsion"
 read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (Example 6.6.62))
 echo "Thank You!"
 dracut --kver=${kernelVarsion}-gentoo
-
-
-echo "*/* dist-kernel" >  /etc/portage/package.use/module-rebuild
 		echo "End Initramfs Build--------------------------------------------"
 
 
@@ -165,39 +162,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 
 
-
-	echo "Start Other Setup--------------------------------------------"
-
-
-
-
-
 	echo "Start Install Japanese Fonts--------------------------------------------"
 emerge source-han-sans
 		echo "End Install Japanese Fonts--------------------------------------------"
 
-
-
-	echo "Start Setup Sudo--------------------------------------------"
-emerge --ask app-admin/sudo
-#add groop
-usermod -aG wheel
-
-		echo "End Setup Sudo--------------------------------------------"
-
-
-
-
-	echo "Start Setup Wifi--------------------------------------------"
-#emerge --ask net-wireless/wpa_supplicant
-#emerge --ask networkmanager
-#systemctl enable NetworkManager
-#echo "modules="wpa_supplicant"" > /etc/conf.d/net
-		echo "End Setup Wifi--------------------------------------------"
-
-
-
-		echo "End Setup--------------------------------------------"
 
 
 	echo "Start Reboot--------------------------------------------"
