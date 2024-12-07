@@ -28,8 +28,9 @@ eselect locale list
 echo "Input Locale Number"
 read localeNum
 echo "Thank You!"
-eselect locale set $localeN
-localectl set-keymap jp106
+eselect locale set $localeNum
+
+
 #locale reload
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
@@ -170,18 +171,21 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 
 
-	echo "Start Setup Sudo--------------------------------------------"
-emerge --ask app-admin/sudo
-
-		echo "End Setup Sudo--------------------------------------------"
-
-
 
 
 	echo "Start Install Japanese Fonts--------------------------------------------"
 emerge source-han-sans
+localectl set-keymap jp106
 		echo "End Install Japanese Fonts--------------------------------------------"
 
+
+
+	echo "Start Setup Sudo--------------------------------------------"
+emerge --ask app-admin/sudo
+#add groop
+usermod -aG wheel
+
+		echo "End Setup Sudo--------------------------------------------"
 
 
 
@@ -194,12 +198,8 @@ emerge source-han-sans
 		echo "End Setup Wifi--------------------------------------------"
 
 
-
-
 		echo "End Setup--------------------------------------------"
 
-
-	echo "Start Reboot--------------------------------------------"
 	
 	
 echo "gentooInstall_3.sh End!!! Next _4!!!"
