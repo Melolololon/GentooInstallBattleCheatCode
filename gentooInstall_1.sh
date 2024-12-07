@@ -1,7 +1,7 @@
 
 	echo "Start parted---------------------------------------------"
 #speep
-(sleep 3s;
+(sleep 2s;
 #efi
 echo "n" ;echo ""; echo ""; echo "+256M";echo "ef00";
 #swap

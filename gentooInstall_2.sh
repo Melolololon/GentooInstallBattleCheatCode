@@ -12,6 +12,10 @@ mount /dev/sda1 /efi
 		
 		
 	echo "Start PortageSetting----------------------------------------------------------"
+mkdir --parents /etc/portage/repos.conf
+cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
+
+
 #sync
 emerge-webrsync
 
