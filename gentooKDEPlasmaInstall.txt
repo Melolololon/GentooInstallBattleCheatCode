@@ -1,0 +1,3 @@
+sudo echo "# KDE-Plasma/Plasma-meta   USEFlag" >> /etc/profile/make.conf
+
+USE="${USE} bluetooth crash-handler crypt desktop-portal display-manager elogind grub handbook kwallet legacy-systray networkmanager pulseaudio sddm smart wallpapers -accessibility -browser-integration -colord -discover (-firewall) -flatpak -gtk -plymouth -sdk  -thunderbolt"
