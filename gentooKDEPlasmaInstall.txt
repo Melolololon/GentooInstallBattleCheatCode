@@ -1,3 +1,39 @@
-sudo echo "# KDE-Plasma/Plasma-meta   USEFlag" >> /etc/profile/make.conf
+#sudo echo "# KDE-Plasma/Plasma-meta   USEFlag" >> /etc/profile/make.conf
 
 USE="${USE} bluetooth crash-handler crypt desktop-portal display-manager elogind grub handbook kwallet legacy-systray networkmanager pulseaudio sddm smart wallpapers -accessibility -browser-integration -colord -discover (-firewall) -flatpak -gtk -plymouth -sdk  -thunderbolt"
+
+emerge --ask x11-base/xorg-server　
+env-update
+source /etc/profile
+
+emerge --ask kde-plasma/plasma-meta
+
+emerge --ask konsole
+
+cd /etc/X11/xinit
+nano /~/.xinitrc
+#cp /etc/X11/xinit/xinitrc /etc/X11/xinit/~/.xinitrc
+exec dbus-launch --exit-with-session startplasma-x11
+
+
+
+echo "www-client/google-chrome google-chrome" >> /etc/portage/package.license
+
+emerge --ask www-client/google-chrome
+
+export PATH="$PATH:/opt/google/chrome"
+
+
+USE="${USE} alsa"
+emerge --ask media-video/pipewire
+
+emerge --ask media-libs/alsa-lib
+
+emerge --ask ufw
+
+systemctl enable ufw
+
+systemctl start ufw
+
+
+
