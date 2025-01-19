@@ -247,7 +247,7 @@ systemctl start ufw
 cd /etc/X11/xinit
 cp xinitrc ~/.xinitrc
 nano ~/.xinitrc
-
+#exec dbus-launch --exit-with-session startplasma-x11
 
 
 	
