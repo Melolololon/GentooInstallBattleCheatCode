@@ -49,7 +49,7 @@ emerge  sys-kernel/linux-firmware
 
 
 	echo "Start Intel Microcode--------------------------------------------"
-emerge  sys-firmware/intel-microcode
+emerge  sys-firmware/intel-microcodeuse 変更
 		echo "End Intel Microcode--------------------------------------------"
 
 
@@ -246,7 +246,7 @@ systemctl start ufw
 	
 cd /etc/X11/xinit
 cp xinitrc ~/.xinitrc
-nano /~/.xinitrc
+nano ~/.xinitrc
 
 
 
