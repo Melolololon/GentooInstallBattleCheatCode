@@ -9,17 +9,10 @@ read profileNum
 echo "Thank You!"
 eselect profile set $profileNum
 
-
-echo 'USE="X"' >> /etc/portage/make.conf
-
-echo 'USE="${USE} bluetooth crash-handler crypt desktop-portal display-manager elogind grub handbook kwallet legacy-systray networkmanager pulseaudio sddm smart wallpapers -accessibility -browser-integration -colord -discover (-firewall) -flatpak -gtk -plymouth -sdk  -thunderbolt"
-' >> /etc/portage/make.conf
-
-echo 'USE="${USE} alsa"' >> /etc/portage/make.conf
-
-
-
 #@world update
+
+
+
 emerge  --verbose --update --deep --newuse @world
 
 		echo "End PortageSetting----------------------------------------------------------"
@@ -210,7 +203,19 @@ usermod -aG wheel
 
 		echo "End Setup--------------------------------------------"
 
-	
+
+
+
+echo 'USE="X"' >> /etc/portage/make.conf
+
+echo 'USE="${USE} bluetooth crash-handler crypt desktop-portal display-manager elogind grub handbook kwallet legacy-systray networkmanager pulseaudio sddm smart wallpapers -accessibility -browser-integration -colord -discover (-firewall) -flatpak -gtk -plymouth -sdk  -thunderbolt"
+' >> /etc/portage/make.conf
+
+echo 'USE="${USE} alsa"' >> /etc/portage/make.conf
+
+
+
+
 	
 emerge  x11-base/xorg-server　
 env-update
@@ -248,7 +253,3 @@ nano /~/.xinitrc
 	
 echo "gentooInstall_3.sh End!!! Next _4!!!"
 exit
-
-
-
-
