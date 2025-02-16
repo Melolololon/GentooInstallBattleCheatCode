@@ -10,7 +10,10 @@ echo "Thank You!"
 eselect profile set $profileNum
 
 #@world update
-emerge --ask --verbose --update --deep --newuse @world
+
+
+
+emerge  --verbose --update --deep --newuse @world
 
 		echo "End PortageSetting----------------------------------------------------------"
 		
@@ -40,14 +43,19 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 
 	echo "Start Install Farmware--------------------------------------------"
-echo 'ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE"' > /etc/portage/make.conf
-emerge --ask sys-kernel/linux-firmware
+echo 'ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
+emerge  sys-kernel/linux-firmware
 		echo "End Install FarmWare--------------------------------------------"
 
 
 	echo "Start Intel Microcode--------------------------------------------"
-emerge --ask sys-firmware/intel-microcode
+emerge  sys-firmware/intel-microcodeuse 変更
 		echo "End Intel Microcode--------------------------------------------"
+
+
+#2025/02/16
+emerge  --oneshot app-portage/cpuid2cpuflags
+echo "*/* $(cpuid2cpuflags)" >> /etc/portage/package.use/00cpu-flags
 
 
 	echo "Start Kernel Compile--------------------------------------------"
@@ -55,22 +63,22 @@ emerge --ask sys-firmware/intel-microcode
 echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel
 	
 #compile kernel
-emerge --ask sys-kernel/gentoo-kernel-bin
+emerge  sys-kernel/gentoo-kernel-bin
 
 #delete
 #emerge --depclean
 
 #rebuild
-#emerge --ask @module-rebuild
+#emerge  @module-rebuild
 #emerge --config sys-kernel/gentoo-kernel-bin
 
 		echo "End Kernel Compile--------------------------------------------"
 
 
 	echo "Start Kernel Source Install--------------------------------------------"
-emerge --ask sys-kernel/installkernel
+emerge  sys-kernel/installkernel
 
-eselect kernel list
+#eselect kernel list
 echo "Input Kernel Number"
 read kernelNum
 echo "Thank You!"
@@ -78,24 +86,24 @@ eselect kernel set $kernelNum
 		echo "End Kernel Source Compile--------------------------------------------"
 
 	#echo "Start Kernel Install--------------------------------------------"
-echo "sys-kernel/installkernel grub" > /etc/portage/package.use/installkernel
-#emerge --ask sys-kernel/installkernel
+echo "sys-kernel/installkernel grub" >> /etc/portage/package.use/installkernel
+emerge  sys-kernel/installkernel
 
 		#echo "End Kernel Install--------------------------------------------"
 
 
-	echo "Start Initramfs Build--------------------------------------------"
-#echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
-emerge --ask sys-kernel/dracut
+	#echo "Start Initramfs Build--------------------------------------------"
+#echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel
+#emerge  sys-kernel/dracut
 
 #draw kernel Var
-cd /usr/src/
-ls
-cd
-echo "Input Kernel Varsion"
-read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (Example 6.6.62))
-echo "Thank You!"
-dracut --kver=${kernelVarsion}-gentoo
+#cd /usr/src/
+#ls
+#cd
+#echo "Input Kernel Varsion"
+#read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (Example 6.6.62))
+#echo "Thank You!"
+#dracut --kver=${kernelVarsion}-gentoo
 
 
 echo "*/* dist-kernel" >> /etc/portage/package.use/module-rebuild
@@ -103,7 +111,7 @@ echo "*/* dist-kernel" >> /etc/portage/package.use/module-rebuild
 
 
 	#echo "Start Kernel Module Rebuild"
-#emerge --ask @module-rebuild
+#emerge  @module-rebuild
 
 		#echo "End Kernel Module Rebuild--------------------------------------------""
 
@@ -123,7 +131,7 @@ hostnamectl hostname ${hostName}
 		echo "End  Host Setting--------------------------------------------"
 
 	echo "Start Network Setting--------------------------------------------"
-emerge --ask net-misc/dhcpcd
+emerge  net-misc/dhcpcd
 systemctl enable dhcpcd
 
 ifconfig
@@ -131,7 +139,7 @@ ifconfig
 echo "Input IP Address"
 read ipAddress
 echo "Thank You!"
-echo "${ipAddress}     ${hostname}.homenetwork ${hostName} localhost" > /etc/hosts
+echo "${ipAddress}     ${hostname}.homenetwork ${hostName} localhost" >> /etc/hosts
 		echo "End  IP Setting--------------------------------------------"
 
 
@@ -152,13 +160,13 @@ systemctl preset-all --preset-mode=enable-only
 
 
 	echo "Start Chrony--------------------------------------------"
-emerge --ask net-misc/chrony
+emerge  net-misc/chrony
 		echo "End Chrony--------------------------------------------"
 
 
 	echo "Start Install GRUB--------------------------------------------"
 echo 'GRUB_PLATFORMS="efi-64"' >> /etc/portage/make.conf
-emerge --ask sys-boot/grub
+emerge  sys-boot/grub
 grub-install --efi-directory=/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 		echo "End Install GRUB--------------------------------------------"
@@ -181,7 +189,7 @@ localectl set-keymap jp106
 
 
 	echo "Start Setup Sudo--------------------------------------------"
-emerge --ask app-admin/sudo
+emerge  app-admin/sudo
 #add groop
 usermod -aG wheel
 
@@ -191,14 +199,17 @@ usermod -aG wheel
 
 
 	echo "Start Setup Wifi--------------------------------------------"
-#emerge --ask net-wireless/wpa_supplicant
-#emerge --ask networkmanager
+#emerge  net-wireless/wpa_supplicant
+#emerge  networkmanager
 #systemctl enable NetworkManager
 #echo "modules="wpa_supplicant"" >> /etc/conf.d/net
 		echo "End Setup Wifi--------------------------------------------"
 
 
 		echo "End Setup--------------------------------------------"
+
+
+
 
 	
 	

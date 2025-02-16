@@ -43,7 +43,7 @@ env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 
 	echo "Start Install Farmware--------------------------------------------"
-echo 'ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE"' > /etc/portage/make.conf
+echo 'ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE"' >> /etc/portage/make.conf
 emerge  sys-kernel/linux-firmware
 		echo "End Install FarmWare--------------------------------------------"
 
@@ -51,6 +51,11 @@ emerge  sys-kernel/linux-firmware
 	echo "Start Intel Microcode--------------------------------------------"
 emerge  sys-firmware/intel-microcodeuse 変更
 		echo "End Intel Microcode--------------------------------------------"
+
+
+#2025/02/16
+emerge  --oneshot app-portage/cpuid2cpuflags
+echo "*/* $(cpuid2cpuflags)" >> /etc/portage/package.use/00cpu-flags
 
 
 	echo "Start Kernel Compile--------------------------------------------"
@@ -73,7 +78,7 @@ emerge  sys-kernel/gentoo-kernel-bin
 	echo "Start Kernel Source Install--------------------------------------------"
 emerge  sys-kernel/installkernel
 
-eselect kernel list
+#eselect kernel list
 echo "Input Kernel Number"
 read kernelNum
 echo "Thank You!"
@@ -81,24 +86,24 @@ eselect kernel set $kernelNum
 		echo "End Kernel Source Compile--------------------------------------------"
 
 	#echo "Start Kernel Install--------------------------------------------"
-echo "sys-kernel/installkernel grub" > /etc/portage/package.use/installkernel
-#emerge  sys-kernel/installkernel
+echo "sys-kernel/installkernel grub" >> /etc/portage/package.use/installkernel
+emerge  sys-kernel/installkernel
 
 		#echo "End Kernel Install--------------------------------------------"
 
 
-	echo "Start Initramfs Build--------------------------------------------"
-#echo "sys-kernel/installkernel dracut" > /etc/portage/package.use/installkernel
-emerge  sys-kernel/dracut
+	#echo "Start Initramfs Build--------------------------------------------"
+#echo "sys-kernel/installkernel dracut" >> /etc/portage/package.use/installkernel
+#emerge  sys-kernel/dracut
 
 #draw kernel Var
-cd /usr/src/
-ls
-cd
-echo "Input Kernel Varsion"
-read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (Example 6.6.62))
-echo "Thank You!"
-dracut --kver=${kernelVarsion}-gentoo
+#cd /usr/src/
+#ls
+#cd
+#echo "Input Kernel Varsion"
+#read kernelVarsion  #数字部分のみを入力 (例 6.6.62)  (Enter numbers only (Example 6.6.62))
+#echo "Thank You!"
+#dracut --kver=${kernelVarsion}-gentoo
 
 
 echo "*/* dist-kernel" >> /etc/portage/package.use/module-rebuild
@@ -134,7 +139,7 @@ ifconfig
 echo "Input IP Address"
 read ipAddress
 echo "Thank You!"
-echo "${ipAddress}     ${hostname}.homenetwork ${hostName} localhost" > /etc/hosts
+echo "${ipAddress}     ${hostname}.homenetwork ${hostName} localhost" >> /etc/hosts
 		echo "End  IP Setting--------------------------------------------"
 
 
